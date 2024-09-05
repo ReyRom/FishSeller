@@ -1,3 +1,4 @@
+using FishSeller.Bot.Commands;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
@@ -14,12 +15,18 @@ app.MapGet("/bot/setWebhook", async (TelegramBotClient bot) => { await bot.SetWe
 app.MapPost("/bot", OnUpdate);
 await app.RunAsync();
 
+
+
 async void OnUpdate(TelegramBotClient bot, Update update)
 {
+
+    await CommandExecutor.Executor.GetUpdate(update);
+
+    /*
     if (update.Message is null) return;			// we want only updates about new Message
     if (update.Message.Text is null) return;	// we want only updates about new Text Message
     var msg = update.Message;
     Console.WriteLine($"Received message '{msg.Text}' in {msg.Chat}");
     // let's echo back received text in the chat
-    await bot.SendTextMessageAsync(msg.Chat, $"{msg.From} said: {msg.Text}");
+    await bot.SendTextMessageAsync(msg.Chat, $"{msg.From} said: {msg.Text}");*/
 }
